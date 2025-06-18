@@ -9,7 +9,7 @@ export default function ContactPage() {
         minHeight: '100vh',
         width: '100vw',
         overflowX: 'hidden',
-        background: 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+        background: 'linear-gradient(135deg,#1e3c72 0%,#2a5298 100%)',
         display: 'flex',
         flexDirection: 'column',
       }}
@@ -44,7 +44,7 @@ export default function ContactPage() {
             <br />
             <Link
               href="mailto:support@translay.ai"
-              sx={{ fontWeight: 600, color: '#f06e37' }}   // same peach family
+              sx={{ fontWeight: 600, color: '#64b5f6' }}
             >
               support@translay.ai
             </Link>

@@ -19,7 +19,7 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
 
-  const PEACH = '#fda085'; // accent colour that matches the gradient
+  const ACCENT = '#64b5f6'; // accent colour matching the new theme
   const links = [
     { label: 'Home',    to: '/' },
     { label: 'About',   to: '/about' },
@@ -54,7 +54,7 @@ export default function Navbar() {
           bottom: 4,
           height: 2,
           borderRadius: 1,
-          backgroundColor: PEACH,
+          backgroundColor: ACCENT,
           opacity: pathname === to ? 1 : 0,
           transform: pathname === to ? 'translateY(0)' : 'translateY(6px)',
           transition: 'all .15s ease',
@@ -123,7 +123,7 @@ export default function Navbar() {
               sx={{
                 py: 1.5,
                 '&:hover': {
-                  backgroundColor: alpha(PEACH, 0.08),
+                  backgroundColor: alpha(ACCENT, 0.08),
                 },
               }}
             >
@@ -131,7 +131,7 @@ export default function Navbar() {
                 primary={l.label}
                 primaryTypographyProps={{
                   fontWeight: pathname === l.to ? 700 : 600,
-                  color: pathname === l.to ? PEACH : 'text.primary',
+                  color: pathname === l.to ? ACCENT : 'text.primary',
                 }}
               />
             </ListItemButton>
