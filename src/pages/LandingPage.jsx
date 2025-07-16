@@ -1090,13 +1090,14 @@ export default function LandingPage() {
                   variant="caption"
                   sx={{ color:'#fff', textAlign:'center', opacity:0.7 }}
               >
-                <Link component={RouterLink} to="/terms" underline="always" sx={{ fontWeight:600, color:'#fff' }}>
-                  Terms&nbsp;of&nbsp;Service
-                </Link>
-                &nbsp;and&nbsp;
-                <Link component={RouterLink} to="/privacy" underline="always" sx={{ fontWeight:600, color:'#fff' }}>
-                  Privacy&nbsp;Policy
-                </Link>
+                {/*<Link component={RouterLink} to="/terms" underline="always" sx={{ fontWeight:600, color:'#fff' }}>*/}
+                {/*  Terms&nbsp;of&nbsp;Service*/}
+                {/*</Link>*/}
+                {/*&nbsp;and&nbsp;*/}
+                {/*<Link component={RouterLink} to="/privacy" underline="always" sx={{ fontWeight:600, color:'#fff' }}>*/}
+                {/*  Privacy&nbsp;Policy*/}
+                {/*</Link>*/}
+                @translay.ai
               </Typography>
             </Box>
         )}
