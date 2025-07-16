@@ -1,84 +1,119 @@
-// src/pages/TermsPage.jsx
 import { Box, Container, Typography } from '@mui/material';
 import Navbar from '../components/Navbar';
 
 export default function TermsPage() {
   return (
-    <Box
-      sx={{
-        minHeight : '100vh',
-        width     : '100vw',
-        overflowX : 'hidden',
-        background: 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
-        display   : 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <Navbar />
-
-      <Container maxWidth="md" sx={{ pt: 12, pb: 8 }}>
-        {/* hero */}
-        <Typography
-          variant="h3"
-          fontWeight={800}
-          fontFamily="Inter"
-          color="#fff"
-          mb={4}
-          textAlign="center"
-        >
-          Terms&nbsp;&nbsp;•&nbsp;&nbsp;Conditions
-        </Typography>
-
-        {/* content card */}
-        <Box
+      <Box
           sx={{
-            backgroundColor: '#fff',
-            borderRadius   : 3,
-            boxShadow      : 4,
-            p              : { xs: 3, sm: 5 },
-            lineHeight     : 1.7,
+            minHeight: '100vh',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
           }}
-        >
-          <Typography variant="h6" fontWeight={700} gutterBottom>
-            1. Introduction
-          </Typography>
-          <Typography variant="body2" paragraph>
-            These Terms of Service (“Terms”) govern your access to and use of Translay.ai
-            (“Service”). By using the Service you agree to be bound by these Terms.
+      >
+        <Navbar />
+
+        <Container maxWidth="md" sx={{ pt: 12, pb: 8 }}>
+          <Typography
+              variant="h3"
+              fontWeight={800}
+              fontFamily="Inter"
+              color="#fff"
+              mb={4}
+              textAlign="center"
+          >
+            Terms&nbsp;•&nbsp;Conditions
           </Typography>
 
-          <Typography variant="h6" fontWeight={700} gutterBottom>
-            2. Use of the Service
-          </Typography>
-          <Typography variant="body2" paragraph>
-            You may not misuse the Service or attempt to access it using a method other than
-            the interface we provide. …
-          </Typography>
+          <Box
+              sx={{
+                backgroundColor: '#fff',
+                borderRadius: 3,
+                boxShadow: 4,
+                p: { xs: 3, sm: 5 },
+                lineHeight: 1.7,
+              }}
+          >
+            <Typography variant="h6" fontWeight={700} gutterBottom>
+              1. Introduction
+            </Typography>
+            <Typography variant="body2" paragraph>
+              These Terms govern your use of translay.ai, operated by Monotech based in Kosovo.
+              By using our service, you agree to these Terms and our Privacy Policy.
+            </Typography>
 
-          <Typography variant="h6" fontWeight={700} gutterBottom>
-            3. Payments &amp; Refunds
-          </Typography>
-          <Typography variant="body2" paragraph>
-            All prices are shown before VAT. You will be billed when you unlock the full
-            translation. …
-          </Typography>
+            <Typography variant="h6" fontWeight={700} gutterBottom>
+              2. Services Offered
+            </Typography>
+            <Typography variant="body2" paragraph>
+              Translay.ai offers AI-powered PDF translation services. Users can preview translations for free
+              and purchase full document translations. No account is required; an email is needed for delivery.
+            </Typography>
 
-          <Typography variant="h6" fontWeight={700} gutterBottom>
-            4. Termination
-          </Typography>
-          <Typography variant="body2" paragraph>
-            We may suspend or terminate your access if you breach these Terms. …
-          </Typography>
+            <Typography variant="h6" fontWeight={700} gutterBottom>
+              3. Acceptable Use
+            </Typography>
+            <Typography variant="body2" paragraph>
+              Users must not upload illegal, infringing, or malicious content. Abuse of the free preview or
+              system exploitation is prohibited.
+            </Typography>
 
-          <Typography variant="h6" fontWeight={700} gutterBottom>
-            5. Governing Law
-          </Typography>
-          <Typography variant="body2">
-            These Terms are governed by the laws of Serbia, without regard to its conflict of
-            law principles. …
-          </Typography>
-        </Box>
-      </Container>
-    </Box>
+            <Typography variant="h6" fontWeight={700} gutterBottom>
+              4. Intellectual Property
+            </Typography>
+            <Typography variant="body2" paragraph>
+              You retain ownership of the documents you upload. Monotech holds all rights to the service's
+              underlying technology and content.
+            </Typography>
+
+            <Typography variant="h6" fontWeight={700} gutterBottom>
+              5. Payments and Refunds
+            </Typography>
+            <Typography variant="body2" paragraph>
+              Prices are stated at checkout. Payments are processed via Paysera. Refunds are only available for
+              defective or missing files, not for stylistic dissatisfaction.
+            </Typography>
+
+            <Typography variant="h6" fontWeight={700} gutterBottom>
+              6. Liability
+            </Typography>
+            <Typography variant="body2" paragraph>
+              Monotech is not liable for indirect damages or translation inaccuracies. Our total liability is
+              limited to the amount paid for the service or €50, whichever is lower.
+            </Typography>
+
+            <Typography variant="h6" fontWeight={700} gutterBottom>
+              7. Termination
+            </Typography>
+            <Typography variant="body2" paragraph>
+              We reserve the right to terminate access for violations of these Terms without notice.
+            </Typography>
+
+            <Typography variant="h6" fontWeight={700} gutterBottom>
+              8. Governing Law
+            </Typography>
+            <Typography variant="body2" paragraph>
+              These Terms are governed by the laws of the Republic of Kosovo. Any disputes shall be resolved
+              under Kosovo's jurisdiction.
+            </Typography>
+
+            <Typography variant="h6" fontWeight={700} gutterBottom>
+              9. Modifications
+            </Typography>
+            <Typography variant="body2" paragraph>
+              We may update these Terms. Material changes will be announced on our website. Continued use of the
+              service constitutes acceptance.
+            </Typography>
+
+            <Typography variant="h6" fontWeight={700} gutterBottom>
+              10. Contact
+            </Typography>
+            <Typography variant="body2">
+              For inquiries, contact us at <a href="mailto:support@translay.ai">support@translay.ai</a>.
+              Monotech, Kosovo.
+            </Typography>
+          </Box>
+        </Container>
+      </Box>
   );
 }

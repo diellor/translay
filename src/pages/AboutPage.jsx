@@ -8,7 +8,6 @@ export default function AboutPage() {
    sx={{
      minHeight: '100vh',
     width: '100vw',
-     background: 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
      display: 'flex',
      flexDirection: 'column',
    }}
@@ -56,15 +55,6 @@ export default function AboutPage() {
             polished translations—so you can focus on content, not conversion.
           </Typography>
 
-          <Typography variant="h6" fontWeight={600} gutterBottom>
-            Meet the Team
-          </Typography>
-          <Typography variant="body1">
-            • Élodie Martin — CEO<br />
-            • Dr. Stefan Popović — CTO<br />
-            • Aria Chen — Lead Product Designer<br />
-            • … and 7 more engineers across 4 time zones.
-          </Typography>
         </Box>
       </Container>
     </Box>

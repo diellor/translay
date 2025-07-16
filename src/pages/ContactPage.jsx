@@ -9,7 +9,6 @@ export default function ContactPage() {
         minHeight: '100vh',
         width: '100vw',
         overflowX: 'hidden',
-        background: 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
         display: 'flex',
         flexDirection: 'column',
       }}
