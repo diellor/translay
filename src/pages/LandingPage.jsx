@@ -1097,7 +1097,7 @@ export default function LandingPage() {
                 {/*<Link component={RouterLink} to="/privacy" underline="always" sx={{ fontWeight:600, color:'#fff' }}>*/}
                 {/*  Privacy&nbsp;Policy*/}
                 {/*</Link>*/}
-                @translay.ai
+                {/*@translay.ai*/}
               </Typography>
             </Box>
         )}
