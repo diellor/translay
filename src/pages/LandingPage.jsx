@@ -1406,7 +1406,7 @@ export default function LandingPage() {
     const c = makeController();
 
     let attempts = 0;
-    const maxAttempts = 24; // 24 × 5 s = 2 min max (translation can take ~40s)
+    const maxAttempts = 72; // 72 × 5s = 6 min max (translation can take 5+ min)
 
     const poll = async () => {
       if (attempts >= maxAttempts) {
