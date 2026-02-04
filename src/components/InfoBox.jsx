@@ -6,9 +6,15 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 export default function InfoBox({ onContinue }) {
   const points = [
     'AI cleans up even the messiest scans',
+      'Auto-detects multiple source languages and translates everything into your target language',
     'Human-quality translation in minutes',
     'Private, EU-hosted & auto-deleted',
     'Pay only if you love the preview',
+      'Fully Preserve Layout\n' +
+      '\n' +
+      'Able to Translate Scanned PDF\n' +
+      '\n' +
+      'Powered by Advanced LLM'
   ];
 
   return (

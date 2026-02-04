@@ -12,7 +12,7 @@ export default function UploadBox({ onUpload }) {
     if (file.type !== 'application/pdf') {
       alert('❌ Please upload a PDF file.'); return;
     }
-    if (file.size > 29 * 1024 * 1024) {
+    if (file.size > 200 * 1024 * 1024) {
       alert('❌ File is larger than 29 MB.'); return;
     }
     onUpload?.(file);
@@ -47,7 +47,7 @@ export default function UploadBox({ onUpload }) {
         Drop / Add PDF
       </Typography>
       <Typography variant="caption" sx={{ mt:1, color:'#666' }}>
-        Max size: 29 MB
+        Max size: 200 MB
       </Typography>
     </Box>
   );

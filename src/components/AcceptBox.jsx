@@ -11,6 +11,12 @@ export default function AcceptBox({ onAccept }) {
     'Pay only if you’re happy',
     'Private & secure (EU-based)',
     'Auto-deletes after 30 days',
+      'Auto-detects multiple source languages and translates everything into your target language',
+      'Fully Preserve Layout\n' +
+      '\n' +
+      'Able to Translate Scanned PDF\n' +
+      '\n' +
+      'Powered by Advanced LLM'
   ];
 
   return (
