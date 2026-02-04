@@ -1406,7 +1406,7 @@ export default function LandingPage() {
     const c = makeController();
 
     let attempts = 0;
-    const maxAttempts = 12; // 12 × 5 s = 1 min max
+    const maxAttempts = 24; // 24 × 5 s = 2 min max (translation can take ~40s)
 
     const poll = async () => {
       if (attempts >= maxAttempts) {
@@ -1431,9 +1431,10 @@ export default function LandingPage() {
       } catch (err) { console.error('Polling error', err); }
     };
 
+    poll(); // Run immediately on first load
     const id = setInterval(poll, 5000);
     return () => { clearInterval(id); c.abort(); };
-  }, [uploadState, translationState, fileId, htmlPreview, pdfUrl]);
+  }, [uploadState, translationState, fileId]);
 
   /* ---------------------------------------------------------------------------
      Waiting-message rotation with fade effect
