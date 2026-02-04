@@ -1685,7 +1685,7 @@ export default function LandingPage() {
                         />
                       </Box>
 
-                      {/* Download button */}
+                      {/* Download buttons */}
                       <Box sx={{ display:'flex', gap:2, mt:2 }}>
                         <Button
                             variant="contained"
@@ -1694,6 +1694,22 @@ export default function LandingPage() {
                             sx={{ textTransform:'none', fontWeight:600 }}
                         >
                           Download PDF
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            disabled={steadyState !== 'done'}
+                            onClick={async () => {
+                              try {
+                                const res = await fetch(`https://0hzrc4zx45.execute-api.eu-west-3.amazonaws.com/get-preview?fileId=${fileId}&type=docx`);
+                                if (res.ok) {
+                                  const { url } = await res.json();
+                                  window.open(url, '_blank');
+                                }
+                              } catch (e) { console.error('DOCX download error', e); }
+                            }}
+                            sx={{ textTransform:'none', fontWeight:600 }}
+                        >
+                          Download DOCX
                         </Button>
                       </Box>
                     </Box>
