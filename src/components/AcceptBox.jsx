@@ -6,17 +6,11 @@ import { Link as RouterLink } from 'react-router-dom';
 
 export default function AcceptBox({ onAccept }) {
   const features = [
-    'Edit first 10 pages & download',
-    'Works with any messy PDF',
-    'Pay only if you’re happy',
-    'Private & secure (EU-based)',
-    'Auto-deletes after 30 days',
-      'Auto-detects multiple source languages and translates everything into your target language',
-      'Fully Preserve Layout\n' +
-      '\n' +
-      'Able to Translate Scanned PDF\n' +
-      '\n' +
-      'Powered by Advanced LLM'
+    'Translate up to 50 pages per document',
+    'Preserves original layout and formatting',
+    'Preview first 5 pages before full translation',
+    'Private & secure (EU-hosted)',
+    'Files auto-deleted after 30 days',
   ];
 
   return (

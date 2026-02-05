@@ -3,17 +3,30 @@ import {
   Box, Typography, IconButton,
 } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { PDFDocument } from 'pdf-lib';
+
+const MAX_PAGES = 50;
 
 export default function UploadBox({ onUpload }) {
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleFile = (file) => {
+  const handleFile = async (file) => {
     if (!file) return;
     if (file.type !== 'application/pdf') {
       alert('❌ Please upload a PDF file.'); return;
     }
     if (file.size > 200 * 1024 * 1024) {
-      alert('❌ File is larger than 29 MB.'); return;
+      alert('❌ File is larger than 200 MB.'); return;
+    }
+    try {
+      const buf = await file.arrayBuffer();
+      const doc = await PDFDocument.load(buf, { ignoreEncryption: true });
+      if (doc.getPageCount() > MAX_PAGES) {
+        alert(`❌ Document has ${doc.getPageCount()} pages. Maximum allowed is ${MAX_PAGES} pages.`);
+        return;
+      }
+    } catch {
+      // If page counting fails, let the backend handle it
     }
     onUpload?.(file);
   };
@@ -47,7 +60,7 @@ export default function UploadBox({ onUpload }) {
         Drop / Add PDF
       </Typography>
       <Typography variant="caption" sx={{ mt:1, color:'#666' }}>
-        Max size: 200 MB
+        Max {MAX_PAGES} pages · 200 MB
       </Typography>
     </Box>
   );
