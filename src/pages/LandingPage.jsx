@@ -1275,7 +1275,6 @@ export default function LandingPage() {
         if (xhr.status !== 200) { setUploadState('error'); return; }
         setUploadProgress(100);
         setUploadState('success');
-        setShowInfo(true);
       };
 
       xhr.onerror = () => setUploadState('error');
