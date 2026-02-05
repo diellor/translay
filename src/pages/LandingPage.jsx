@@ -118,7 +118,7 @@
 //     if (file.size > 29 * 1024 * 1024)    { alert('❌ File is larger than 29 MB.'); return; }
 //
 //     try {
-//       setUploadState('uploading'); setUploadProgress(0); setPretendUploading(false);
+//       setUploadState('uploading'); setUploadProgress(0);
 //
 //       const ctrl = makeController();
 //       const res  = await fetch('https://0hzrc4zx45.execute-api.eu-west-3.amazonaws.com/upload-url',
@@ -283,7 +283,7 @@
 //
 //   /* ---------- misc ---------- */
 //   const gap = theme.spacing(6);
-//   const isUploadingPhase = (uploadState === 'uploading' || pretendUploading);
+//   const isUploadingPhase = uploadState === 'uploading';
 //
 //   /* ---------- render ---------- */
 //   return (
@@ -656,7 +656,7 @@
 //     if (file.size > 29 * 1024 * 1024)    { alert('❌ File is larger than 29 MB.'); return; }
 //
 //     try {
-//       setUploadState('uploading'); setUploadProgress(0); setPretendUploading(false);
+//       setUploadState('uploading'); setUploadProgress(0);
 //
 //       const ctrl = makeController();
 //       const res  = await fetch('https://0hzrc4zx45.execute-api.eu-west-3.amazonaws.com/upload-url',
@@ -1255,7 +1255,7 @@ export default function LandingPage() {
     if (file.size > 200 * 1024 * 1024)    { alert('❌ File is larger than 200 MB.'); return; }
 
     try {
-      setUploadState('uploading'); setUploadProgress(0); setPretendUploading(false);
+      setUploadState('uploading'); setUploadProgress(0);
 
       const ctrl = makeController();
       const res  = await fetch('https://0hzrc4zx45.execute-api.eu-west-3.amazonaws.com/upload-url',
@@ -1269,32 +1269,13 @@ export default function LandingPage() {
       xhr.open('PUT', url, true);
       xhr.setRequestHeader('Content-Type', 'application/pdf');
       xhr.upload.onprogress = e =>
-          e.lengthComputable && setUploadProgress(Math.round((e.loaded / e.total) * 90));
+          e.lengthComputable && setUploadProgress(Math.round((e.loaded / e.total) * 100));
 
       xhr.onload = () => {
         if (xhr.status !== 200) { setUploadState('error'); return; }
-
-        /* ---- 10-second fake finish ---- */
-        setPretendUploading(true);
-        const startPct  = Math.max(uploadProgress, 90);
-        const duration  = 15_000;
-        const stepTime  = 200;
-        const steps     = Math.ceil(duration / stepTime);
-        const increment = (100 - startPct) / steps;
-        let   pct       = startPct;
-        setUploadProgress(pct);
-
-        pretendTimerRef.current = setInterval(() => {
-          pct += increment;
-          setUploadProgress(Math.min(100, pct));
-
-          if (pct >= 100) {
-            clearInterval(pretendTimerRef.current);
-            setPretendUploading(false);
-            setUploadState('success');
-            setShowInfo(true);
-          }
-        }, stepTime);
+        setUploadProgress(100);
+        setUploadState('success');
+        setShowInfo(true);
       };
 
       xhr.onerror = () => setUploadState('error');
@@ -1464,7 +1445,7 @@ export default function LandingPage() {
      Derived helpers
   ---------------------------------------------------------------------------- */
   const gap              = theme.spacing(6);
-  const isUploadingPhase = (uploadState === 'uploading' || pretendUploading);
+  const isUploadingPhase = uploadState === 'uploading';
   const isBusyPhase      = isUploadingPhase ||
       ['loading','waiting_ocr','starting'].includes(steadyState);
 
