@@ -41,6 +41,7 @@ export default function LandingPage() {
 
   /* price & purchase */
   const [price,         setPrice]         = useState(null);
+  const [pageCount,     setPageCount]     = useState(0);
   const [purchaseState, setPurchaseState] = useState('idle');
   const [userEmail,     setUserEmail]     = useState('');
   const [emailValid,    setEmailValid]    = useState(false);
@@ -144,7 +145,7 @@ export default function LandingPage() {
     setUploadState('idle'); setTranslationState('idle');
     setPurchaseState('idle'); setFileId(null); currentFileIdRef.current = null;
     setTranslationLang(''); setPdfUrl(''); setFullDocUrl('');
-    setPrice(null); setUserEmail(''); setEmailValid(false);
+    setPrice(null); setPageCount(0); setUserEmail(''); setEmailValid(false);
     setUploadProgress(0); setWaitMsgIdx(0); setFadeIn(true);
     sessionStorage.removeItem('translay_state');
   };
@@ -213,7 +214,8 @@ export default function LandingPage() {
           return;
         }
         setPrice(d.price);
-      } catch { setPrice(null); }
+        setPageCount(d.pages || 0);
+      } catch { setPrice(null); setPageCount(0); }
     })();
   }, [fileId, translationState]);
 
@@ -481,14 +483,14 @@ export default function LandingPage() {
 
                   {/* 5. Preview ready */}
                   {uploadState==='success' && steadyState==='done' && purchaseState==='idle' && (
-                      price > 0 ? (
+                      pageCount > 5 ? (
                           <>
                             <Typography variant="h6" fontWeight={600} align="center" color="primary" mb={2}>
-                              Preview Ready
+                              Preview Ready ({pageCount} pages total)
                             </Typography>
                             <Button variant="contained" fullWidth onClick={handleUnlockClick}
                                     sx={{ py:1.3, textTransform:'none', fontWeight:600, borderRadius:2 }}>
-                              Unlock Full Translation — ${price}
+                              Unlock Full Translation
                             </Button>
                             <Button variant="outlined" fullWidth onClick={resetAll}
                                     sx={{ mt:2, textTransform:'none', fontWeight:600, borderRadius:2 }}>
@@ -498,7 +500,7 @@ export default function LandingPage() {
                       ) : (
                           <>
                             <Typography variant="h6" fontWeight={600} align="center" color="primary" mb={2}>
-                              Preview Ready
+                              Translation Complete
                             </Typography>
                             <Button variant="outlined" fullWidth onClick={resetAll}
                                     sx={{ py:1.3, textTransform:'none', fontWeight:600, borderRadius:2 }}>
