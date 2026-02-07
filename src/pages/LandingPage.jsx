@@ -655,6 +655,14 @@ export default function LandingPage() {
             </Grid>
           </Container>
         </Box>
+
+        {/* Footer */}
+        <Box sx={{ textAlign:'center', py:2, color:'rgba(255,255,255,0.5)', fontSize:'0.875rem' }}>
+          Need help? Contact us at{' '}
+          <a href="mailto:support@translay.ai" style={{ color:'rgba(255,255,255,0.7)', textDecoration:'none' }}>
+            support@translay.ai
+          </a>
+        </Box>
       </Box>
   );
 }
