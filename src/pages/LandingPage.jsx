@@ -66,8 +66,6 @@ export default function LandingPage() {
 
   /* UI helpers */
   const [steadyState, setSteadyState] = useState('idle');
-  const [urlExpired, setUrlExpired] = useState(false);
-  const [urlChecking, setUrlChecking] = useState(false);
 
   /* ---------- rotating waiting messages -------------------------------------- */
   const waitingMessages = [
@@ -96,36 +94,6 @@ export default function LandingPage() {
     clearInterval(rotateRef.current);
     clearTimeout(fadeRef.current);
   }, []);
-
-  /* ---------------------------------------------------------------------------
-     Check if preview URL has expired
-  ---------------------------------------------------------------------------- */
-  useEffect(() => {
-    if (!pdfUrl) return;
-    if (urlExpired) return;
-
-    const checkExpiration = async () => {
-      setUrlChecking(true);
-      try {
-        const res = await fetch(pdfUrl, { method: 'HEAD' });
-        if (res.status === 403 || !res.ok) {
-          setUrlExpired(true);
-        }
-      } catch {
-        // If fetch fails entirely, assume expired
-        setUrlExpired(true);
-      } finally {
-        setUrlChecking(false);
-      }
-    };
-
-    // Check immediately when pdfUrl is set or changes
-    checkExpiration();
-
-    // Then check every minute while the page is open
-    const id = setInterval(checkExpiration, 60000);
-    return () => clearInterval(id);
-  }, [pdfUrl, urlExpired]);
 
   /* ---------------------------------------------------------------------------
      Session restore
@@ -179,7 +147,6 @@ export default function LandingPage() {
     setTranslationLang(''); setPdfUrl(''); setFullDocUrl('');
     setPrice(null); setPageCount(0); setUserEmail(''); setEmailValid(false);
     setUploadProgress(0); setWaitMsgIdx(0); setFadeIn(true);
-    setUrlExpired(false); setUrlChecking(false);
     sessionStorage.removeItem('translay_state');
   };
   const handleCancel = resetAll;
@@ -639,60 +606,30 @@ export default function LandingPage() {
                     <Box sx={{ width:'100%', maxWidth:'85ch', display:'flex', flexDirection:'column' }}>
                       {/* PDF preview embed */}
                       <Box sx={{ backgroundColor:'#fff', borderRadius:2, overflow:'hidden', boxShadow:2, height:'70vh', display:'flex', alignItems:'center', justifyContent:'center' }}>
-                        {urlExpired ? (
-                          <Box sx={{ textAlign:'center', p:4 }}>
-                            <Typography variant="h6" fontWeight={600} color="textSecondary" mb={2}>
-                              Preview link has expired
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" mb={3}>
-                              Please translate a new document to continue.
-                            </Typography>
-                            <Button variant="contained" onClick={resetAll}
-                                    sx={{ textTransform:'none', fontWeight:600, borderRadius:2 }}>
-                              Translate another file
-                            </Button>
-                          </Box>
-                        ) : urlChecking ? (
-                          <CircularProgress />
-                        ) : (
-                          <iframe
-                            src={pdfUrl}
-                            style={{ width:'100%', height:'100%', border:'none' }}
-                            title="Translation preview"
-                          />
-                        )}
+                        <iframe
+                          src={pdfUrl}
+                          style={{ width:'100%', height:'100%', border:'none' }}
+                          title="Translation preview"
+                        />
                       </Box>
 
                       {/* Download buttons */}
                       <Box sx={{ display:'flex', gap:2, mt:2 }}>
                         <Button
                             variant="contained"
-                            disabled={steadyState !== 'done' || urlExpired}
-                            onClick={async () => {
-                              try {
-                                const res = await fetch(pdfUrl, { method: 'HEAD' });
-                                if (res.status === 403) {
-                                  setUrlExpired(true);
-                                } else {
-                                  window.open(pdfUrl, '_blank');
-                                }
-                              } catch {
-                                window.open(pdfUrl, '_blank');
-                              }
-                            }}
+                            disabled={steadyState !== 'done'}
+                            onClick={() => window.open(pdfUrl,'_blank')}
                             sx={{ textTransform:'none', fontWeight:600, borderRadius:2 }}
                         >
                           Download PDF
                         </Button>
                         <Button
                             variant="outlined"
-                            disabled={steadyState !== 'done' || urlExpired}
+                            disabled={steadyState !== 'done'}
                             onClick={async () => {
                               try {
                                 const res = await fetch(`https://0hzrc4zx45.execute-api.eu-west-3.amazonaws.com/get-preview?fileId=${fileId}&type=docx`);
-                                if (res.status === 403) {
-                                  setUrlExpired(true);
-                                } else if (res.ok) {
+                                if (res.ok) {
                                   const { url } = await res.json();
                                   window.open(url, '_blank');
                                 }
