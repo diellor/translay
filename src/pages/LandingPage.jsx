@@ -707,10 +707,10 @@ export default function LandingPage() {
                 ) : (
                     <Box sx={{ opacity:accepted ? 1 : 0.35, transition:'opacity .6s', maxWidth:'85ch' }}>
                       <Typography variant="h3" sx={{ fontWeight:800, fontFamily:'Inter', color:'#fff' }}>
-                        Document translation, simplified
+                        AI-powered document translation
                       </Typography>
                       <Typography variant="h6" sx={{ fontFamily:'Inter', fontWeight:400, color:'rgba(255,255,255,0.85)', mt:1 }}>
-                        Upload a PDF, pick a language, get a professionally translated document — layout preserved.
+                        Upload a PDF, pick a language, get a professionally translated document with layout preserved.
                       </Typography>
                     </Box>
                 )}
