@@ -67,6 +67,7 @@ export default function LandingPage() {
   /* UI helpers */
   const [steadyState, setSteadyState] = useState('idle');
   const [urlExpired, setUrlExpired] = useState(false);
+  const [urlChecking, setUrlChecking] = useState(false);
 
   /* ---------- rotating waiting messages -------------------------------------- */
   const waitingMessages = [
@@ -100,16 +101,29 @@ export default function LandingPage() {
      Check if preview URL has expired
   ---------------------------------------------------------------------------- */
   useEffect(() => {
-    if (!pdfUrl || urlExpired) return;
+    if (!pdfUrl) return;
+    if (urlExpired) return;
+
     const checkExpiration = async () => {
+      setUrlChecking(true);
       try {
         const res = await fetch(pdfUrl, { method: 'HEAD' });
-        if (res.status === 403) setUrlExpired(true);
-      } catch {}
+        if (res.status === 403 || !res.ok) {
+          setUrlExpired(true);
+        }
+      } catch {
+        // If fetch fails entirely, assume expired
+        setUrlExpired(true);
+      } finally {
+        setUrlChecking(false);
+      }
     };
-    // Check immediately, then every 2 minutes
+
+    // Check immediately when pdfUrl is set or changes
     checkExpiration();
-    const id = setInterval(checkExpiration, 120000);
+
+    // Then check every minute while the page is open
+    const id = setInterval(checkExpiration, 60000);
     return () => clearInterval(id);
   }, [pdfUrl, urlExpired]);
 
@@ -164,7 +178,8 @@ export default function LandingPage() {
     setPurchaseState('idle'); setFileId(null); currentFileIdRef.current = null;
     setTranslationLang(''); setPdfUrl(''); setFullDocUrl('');
     setPrice(null); setPageCount(0); setUserEmail(''); setEmailValid(false);
-    setUploadProgress(0); setWaitMsgIdx(0); setFadeIn(true); setUrlExpired(false);
+    setUploadProgress(0); setWaitMsgIdx(0); setFadeIn(true);
+    setUrlExpired(false); setUrlChecking(false);
     sessionStorage.removeItem('translay_state');
   };
   const handleCancel = resetAll;
@@ -637,6 +652,8 @@ export default function LandingPage() {
                               Translate another file
                             </Button>
                           </Box>
+                        ) : urlChecking ? (
+                          <CircularProgress />
                         ) : (
                           <iframe
                             src={pdfUrl}
