@@ -562,7 +562,7 @@ export default function LandingPage() {
                                 Translating full document...
                               </Typography>
                               <Typography variant="body2" color="textSecondary" align="center">
-                                You can wait here and download when ready, or close this page and receive the download link via email.
+                                You can wait here and download when ready, or close this page and receive the download link via email (check spam folder).
                               </Typography>
                             </Box>
                           </>
