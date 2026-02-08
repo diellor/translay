@@ -392,13 +392,13 @@ export default function LandingPage() {
         {!isBusyPhase && <Navbar/>}
 
         <Box sx={{ flexGrow:1, display:'flex', alignItems:'center', justifyContent:'center',
-          height:'100vh', mt:isBusyPhase ? 0 : '-64px' }}>
-          <Container maxWidth="lg">
+          minHeight:{ xs:'auto', md:'100vh' }, py:{ xs:10, md:0 }, mt:isBusyPhase ? 0 : { xs:0, md:'-64px' } }}>
+          <Container maxWidth="lg" sx={{ px:{ xs:2, sm:3 } }}>
             <Grid container wrap={{ xs:'wrap', md:'nowrap' }} alignItems="center" sx={{ columnGap:{ xs:0, md:gap } }}>
               {/* LEFT CARD ---------------------------------------------------- */}
-              <Grid item sx={{ flex:'0 0 360px', width:'100%', mb:{ xs:4, md:0 } }}>
+              <Grid item xs={12} md={5} sx={{ width:'100%', mb:{ xs:4, md:0 } }}>
                 <Typography variant="h3" sx={{ fontFamily:'Montserrat', fontWeight:700,
-                  color:'#fff', mb:3, textAlign:'center' }}>
+                  color:'#fff', mb:{ xs:2, md:3 }, textAlign:'center', fontSize:{ xs:'1.75rem', sm:'2.5rem', md:'3rem' } }}>
                   translay.ai
                 </Typography>
 
@@ -601,7 +601,7 @@ export default function LandingPage() {
               </Grid>
 
               {/* RIGHT preview / hero ------------------------------------------------ */}
-              <Grid item sx={{ flex:'1 1 0', display:{ xs:'none', md:'flex' }, justifyContent:'center' }}>
+              <Grid item xs={12} md={7} sx={{ display:{ xs:'none', md:'flex' }, justifyContent:'center' }}>
                 {pdfUrl ? (
                     <Box sx={{ width:'100%', maxWidth:'85ch', display:'flex', flexDirection:'column' }}>
                       {/* PDF preview embed */}
@@ -642,11 +642,11 @@ export default function LandingPage() {
                       </Box>
                     </Box>
                 ) : (
-                    <Box sx={{ opacity:accepted ? 1 : 0.35, transition:'opacity .6s', maxWidth:'85ch' }}>
-                      <Typography variant="h3" sx={{ fontWeight:800, fontFamily:'Inter', color:'#fff' }}>
+                    <Box sx={{ opacity:accepted ? 1 : 0.35, transition:'opacity .6s', maxWidth:'85ch', px:{ xs:2, md:0 } }}>
+                      <Typography variant="h3" sx={{ fontWeight:800, fontFamily:'Inter', color:'#fff', fontSize:{ xs:'2rem', md:'2.5rem', lg:'3rem' } }}>
                         AI-powered document translation
                       </Typography>
-                      <Typography variant="h6" sx={{ fontFamily:'Inter', fontWeight:400, color:'rgba(255,255,255,0.85)', mt:1 }}>
+                      <Typography variant="h6" sx={{ fontFamily:'Inter', fontWeight:400, color:'rgba(255,255,255,0.85)', mt:1, fontSize:{ xs:'1rem', md:'1.15rem', lg:'1.25rem' } }}>
                         Upload a PDF, pick a language, get a professionally translated document with layout preserved.
                       </Typography>
                     </Box>
